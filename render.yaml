@@ -71,9 +71,10 @@ services:
       - key: COPERNICUS_PASSWORD
         sync: false
 
-staticSites:
   # 5. React Frontend (Static Site)
-  - name: agie-frontend
+  - type: web
+    name: agie-frontend
+    runtime: static
     buildCommand: cd frontend && npm install && npm run build
     staticPublishPath: ./frontend/dist
     routes:
