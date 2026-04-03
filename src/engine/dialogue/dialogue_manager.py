@@ -82,6 +82,20 @@ class DialogueManager:
         """
         Operator Interface (Step 5): Answer situational awareness questions.
         """
+        if self.model:
+            try:
+                prompt = f"""
+                You are AGIE (Autonomous Geospatial Intelligence Engine), an AI assistant for environmental anomaly monitoring.
+                The operator is asking a question about the current situational awareness or geospatial anomalies.
+                Provide a professional, concise, and helpful response.
+                
+                Operator Question: {user_query}
+                """
+                response = self.model.generate_content(prompt)
+                return response.text
+            except Exception as e:
+                return f"Gemini query failed ({str(e)}). Fallback:\n\n{self.mock_responses.get('default')}"
+
         if "status" in user_query.lower() or "what" in user_query.lower():
             return self.mock_responses.get("status")
         return self.mock_responses.get("default")
