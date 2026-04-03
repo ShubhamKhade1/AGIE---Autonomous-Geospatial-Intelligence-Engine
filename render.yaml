@@ -23,8 +23,10 @@ services:
     buildCommand: cd frontend && npm install && npm run build
     staticPublishPath: ./frontend/dist
     envVars:
+      # Must be the public HTTPS URL of your API service (Render dashboard → agie-api → URL).
+      # If your hostname differs (e.g. agie-api-xxxxx), update this and redeploy the static site.
       - key: VITE_API_URL
-        value: https://agie-api.onrender.com
+        value: https://agie-api-ppwe.onrender.com
     routes:
       - type: rewrite
         source: /*
